@@ -1,0 +1,33 @@
+SIDI
+Serial Instrument Digital Interface
+
+Where, an instrument is a connected device which has functions controlled by the protocol. 
+
+
+This is the Hub World protocol for serial messages and is based on a 4 byte system.
+It's broadly similar in principle to MIDI for musical instruments. Each satellite has a number, like each synthesizer or module in a MIDI system has a channel. Each satellite receives data only applicable to itself and can echo back that data to the Hub device as confirmation of receipt.
+ 
+Each message is non blocking, allowing the code to perform other functions while serial messages are being transmitted or received. 
+
+Those messages have set limit ranges and each message consists of 4 numbers. 
+The structure is as follows, for example: 999, 101, 245, 502
+999 denotes that a message is incoming
+101 is the satellite number 
+245 is a function to be performed such as a movement on the screen 
+502 is a special function, perhaps to take a reading of a temperature sensor 
+
+When a message has been received by the correct satellite, it will acknowledge the message by returning the number 888 plus the sent message. For example: 888, 101, 245, 502
+If the number 999 is received by a satellite, but the satellite number is incorrect, such as 103 for the example then the rest of the message will be ignored. 
+As such, there is a robust yet simple send and receive protocol in place. 
+ 
+Ranges for the data are as follows - 
+999 is always sent as the first message
+101 - 199 are the satellite numbers
+200 denotes no regular function
+201 - 499 are regular function numbers
+500 denotes no special function 
+501 - 799 are special functions
+888 is the satellite returned confirmation of receipt to the Hub unit
+800 to 880 and 900 - 990 are not allocated.  
+
+Future extensions may include the ability for a non Hub device to send messages to another non Hub device. Such as, satellite 132 sending a message to satellite 106. Such a message need not include the Hub device. 
