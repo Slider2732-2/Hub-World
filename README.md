@@ -8,3 +8,5 @@ Those magnets connect to Vcc, Gnd, TX, RX on the Hub and Vcc, Gnd, RX, TX on the
 <br><br>
 The above Arduino code is merely the start of a journey and much more will be added to this repository in time. <br> 
 See the Slider2732_ YouTube channel for more information and demo's. 
+<br><br>
+[img]HubWorldV04.jpg[/img]
